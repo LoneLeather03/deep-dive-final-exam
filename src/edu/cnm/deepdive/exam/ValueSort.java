@@ -6,13 +6,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.LinkedList;
 
 public class ValueSort {
 
@@ -20,11 +14,9 @@ public class ValueSort {
 	private static final String INPUT = "test-input.dat";
 	private static float counter = 0.0f;
 	private static float sum = 0.0f;
-	
-	
 
 	public static void main(String[] args) {
-		Reader dataReader = new Reader(INPUT);
+		ReadFile dataReader = new ReadFile(INPUT);
 		Float[][] data = dataReader.valueList;
 
 		for (Float[] shuffleLine : data) {
@@ -42,31 +34,28 @@ public class ValueSort {
 		writeData(OUTPUT, data);
 
 	}
-	
-	
-
 
 	private static void writeData(String DATA_OUTPUT, Float[][] shuffled) {
 
-		try (FileOutputStream stream = new FileOutputStream(DATA_OUTPUT);
-				OutputStreamWriter writer = new OutputStreamWriter(stream);
-				PrintWriter printer = new PrintWriter(writer);) {
+		try (FileOutputStream stream = new FileOutputStream(OUTPUT);
+				OutputStreamWriter write = new OutputStreamWriter(stream);
+				PrintWriter print = new PrintWriter(write);) {
 			for (Float[] writeShuffledArray : shuffled) {
 				int i = 1;
 				for (Float number : writeShuffledArray) {
 					counter++;
 					sum += number;
 					if (i++ == writeShuffledArray.length) {
-						printer.printf("%.3f", number);
+						print.printf("%.3f", number);
 
 					} else {
-						printer.printf("%.3f|", number);
+						print.printf("%.3f|", number);
 					}
 				}
-				printer.println();
+				print.println();
 			}
 			float averageValue = (sum / counter);
-			printer.print(averageValue);
+			print.print(averageValue);
 		}
 
 		catch (FileNotFoundException e) {
@@ -77,37 +66,4 @@ public class ValueSort {
 
 	}
 
-
-public class Reader {
-
-	public Float [][] valueList;
-	public Reader(String file) {
-		
-		try (
-				FileReader reader = new FileReader(file);
-				BufferedReader buffer = new BufferedReader(reader);
-				) {
-			LinkedList<Float[]> work = new LinkedList<>();
-			String line;
-			while ((line = buffer.readLine()) != null) {
-				if (line.trim().length() > 0) {
-					String[] values = line.trim().split("\\s+");
-					Float[] FloatValues = new Float[values.length];
-					for (int i = 0; i < values.length; i++) {
-						FloatValues[i] = Float.parseFloat(values[i]);
-					}
-					work.add(FloatValues);
-				}
-			}
-			valueList = work.toArray(new Float [0][]);
-			
-		}catch (NumberFormatException ex) {
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-}
 }
