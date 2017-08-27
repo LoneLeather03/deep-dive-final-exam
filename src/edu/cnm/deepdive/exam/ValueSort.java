@@ -8,13 +8,15 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
 
+/* Class that shuffles and sorts input from file **/
 public class ValueSort {
 
 	private static final String OUTPUT = "test-output.dat";
 	private static final String INPUT = "test-input.dat";
 	private static float counter = 0.0f;
 	private static float sum = 0.0f;
-
+	
+/* Main method calls readFile class to read file, initializes float arrays, shuffles and sorts each line. **/
 	public static void main(String[] args) {
 		ReadFile dataReader = new ReadFile(INPUT);
 		Float[][] data = dataReader.valueList;
@@ -35,6 +37,9 @@ public class ValueSort {
 
 	}
 
+	/* writeData method writes output to file with three decimal places to the right of each value, 
+	 * a vertical bar delimiter and iterates through the values adding them together and dividing by
+	 *  the total number of values to find the average value then print it on the last line. **/
 	private static void writeData(String DATA_OUTPUT, Float[][] shuffled) {
 
 		try (FileOutputStream stream = new FileOutputStream(OUTPUT);

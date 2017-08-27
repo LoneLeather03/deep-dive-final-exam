@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
+/* Class that reads input file **/
 public class ReadFile {
 
 	public Float[][] valueList;
