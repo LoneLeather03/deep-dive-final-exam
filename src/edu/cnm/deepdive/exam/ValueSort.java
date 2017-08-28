@@ -39,7 +39,7 @@ public class ValueSort {
 
 	/* writeData method writes output to file with three decimal places to the right of each value, 
 	 * a vertical bar delimiter and iterates through the values adding them together and dividing by
-	 *  the total number of values to find the average value then print it on the last line. **/
+	 *  the total number of elements to find the average value then print it on the last line. **/
 	private static void writeData(String DATA_OUTPUT, Float[][] shuffled) {
 
 		try (FileOutputStream stream = new FileOutputStream(OUTPUT);
