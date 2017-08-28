@@ -11,6 +11,7 @@ public class ReadFile {
 
 	public Float[][] valueList;
 
+	/* Method for reading input file **/
 	public ReadFile(String file) {
 
 		try (FileReader reader = new FileReader(file); BufferedReader buffer = new BufferedReader(reader);) {
